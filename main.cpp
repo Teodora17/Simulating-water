@@ -26,7 +26,7 @@ glm::vec3 lightColor(0.0f, 0.0f, 0.9f);
 
 
 
-bool ok = true; //test mouse movement
+bool ok = true; // test mouse movement
 
 float lastX = 0.0f;
 float lastY = 0.0f;
@@ -41,12 +41,12 @@ int main()
 {
 	glClearColor(0.2f, 0.8f, 1.0f, 1.0f);
 
-	//building and compiling shader program
+	// building and compiling shader program
 	Shader shader("Shaders/vertex_shader.glsl", "Shaders/fragment_shader.glsl");
 	Shader sunShader("Shaders/sun_vertex_shader.glsl", "Shaders/sun_fragment_shader.glsl");
 	Shader carShader("Shaders/car_vertex_shader.glsl", "Shaders/car_frag_shader.glsl");
 	
-	//Textures
+	// Textures
 	GLuint tex = loadBMP("Resources/Textures/wood.bmp");
 	GLuint tex2 = loadBMP("Resources/Textures/water.bmp");
 	GLuint tex3 = loadBMP("Resources/Textures/orange.bmp");
@@ -55,7 +55,7 @@ int main()
 
 	glEnable(GL_DEPTH_TEST);
 
-	//Test custom mesh loading
+	// Test custom mesh loading
 	std::vector<Vertex> vert;
 	vert.push_back(Vertex());
 	vert[0].pos = glm::vec3(10.5f, 10.5f, 0.0f);
@@ -115,7 +115,7 @@ int main()
 	Mesh car = loader.loadObj("Resources/Models/car.obj");
 	frequency = 2 * 3.1415 / length;
 	phase = speed * 2 * 3.1415 / length;
-	//check if we close the window or press the escape button
+	// check if we close the window or press the escape button
 	while (!window.isPressed(GLFW_KEY_ESCAPE) &&
 		glfwWindowShouldClose(window.getWindow()) == 0)
 	{
@@ -132,7 +132,7 @@ int main()
 		
 		processKeyboardInput();
 
-		//test mouse input
+		// test mouse input
 		if (window.isMousePressed(GLFW_MOUSE_BUTTON_LEFT))
 		{
 			std::cout << "Pressing mouse button" << std::endl;
@@ -148,7 +148,7 @@ int main()
 
 		GLuint MatrixID = glGetUniformLocation(sunShader.getId(), "MVP");
 
-		//Test for one Obj loading = light source
+		// Test for one Obj loading = light source
 
 		glm::mat4 ModelMatrix = glm::mat4(1.0);
 		ModelMatrix = glm::translate(ModelMatrix, lightPos);
@@ -171,7 +171,7 @@ int main()
 		GLuint Direction = glGetUniformLocation(shader.getId(), "direction");
 		GLuint Freq = glGetUniformLocation(shader.getId(), "frequency");
 		GLuint Phase = glGetUniformLocation(shader.getId(), "phase");
-		//GLuint Lightcucc = glGetUniformLocation(shader.getId(), "lightColor");
+		// GLuint Lightcucc = glGetUniformLocation(shader.getId(), "lightColor");
 
 		ModelMatrix = glm::mat4(1.0);
 		ModelMatrix = glm::translate(ModelMatrix, glm::vec3(0.0f, 0.0f, 0.0f));
@@ -189,15 +189,15 @@ int main()
 		glUniform1f(glGetUniformLocation(shader.getId(), "phase"), phase);
 		
 
-		//box.draw(shader);
+		// box.draw(shader);
 
 		///// Test water Obj file //////
 
-	/*	ModelMatrix = glm::mat4(1.0);
+	     /* ModelMatrix = glm::mat4(1.0);
 		ModelMatrix = glm::translate(ModelMatrix, glm::vec3(0.0f, -20.0f, 0.0f));
 		MVP = ProjectionMatrix * ViewMatrix * ModelMatrix;
 		glUniformMatrix4fv(MatrixID2, 1, GL_FALSE, &MVP[0][0]);
-		glUniformMatrix4fv(ModelMatrixID, 1, GL_FALSE, &ModelMatrix[0][0]);*/
+		glUniformMatrix4fv(ModelMatrixID, 1, GL_FALSE, &ModelMatrix[0][0]); */
 
 		plane.draw(shader);
 		
@@ -222,7 +222,7 @@ int main()
 		glUniformMatrix4fv(MatrixID2, 1, GL_FALSE, &MVP[0][0]);
 		glUniformMatrix4fv(ModelMatrixID, 1, GL_FALSE, &ModelMatrix[0][0]);
 
-		//rock2.draw(shader);
+		// rock2.draw(shader);
 
 		window.update();
 	}
@@ -232,7 +232,7 @@ void processKeyboardInput()
 {
 	float cameraSpeed = 150 * deltaTime;
 
-	//translation
+	// translation
 	if (window.isPressed(GLFW_KEY_W))
 		camera.keyboardMoveFront(cameraSpeed);
 	if (window.isPressed(GLFW_KEY_S))
@@ -246,7 +246,7 @@ void processKeyboardInput()
 	if (window.isPressed(GLFW_KEY_F))
 		camera.keyboardMoveDown(cameraSpeed);
 
-	//rotation
+	// rotation
 	if (window.isPressed(GLFW_KEY_LEFT))
 		camera.rotateOy(cameraSpeed);
 	if (window.isPressed(GLFW_KEY_RIGHT))
